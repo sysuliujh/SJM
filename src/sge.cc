@@ -129,6 +129,14 @@ SgeBatchSystem::submit (Job& job)
     if (job.timeLimit() > 0) {
 	qparams << " -l h_rt=" << job.timeLimit() << ":00:00";
     }
+	
+	//Add by Jianheng, 20180730
+	//###########################################
+	if (!job.hostName().empty()) {
+	qparams << " -l hostname=" << job.hostName();
+    }
+	//###########################################
+	
     if (!job.queue().empty()) {
 	qparams << " -q " << job.queue();
     }

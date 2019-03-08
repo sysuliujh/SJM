@@ -414,6 +414,13 @@ JobGraph::print (ostream& os) const
 	if (job.timeLimit() > 0) {
 	    os << "    time " << job.timeLimit() << " h\n";
 	}
+	
+	//Add by Jianheng, 20180730
+	//###########################################
+	if (!job.hostName().empty()) {
+	    os << "    hostname " << job.hostName() << "\n";
+    }
+	//###########################################
 	if (!job.queue().empty()) {
 	    os << "    queue " << job.queue() << "\n";
 	}
@@ -622,6 +629,10 @@ const regex JobGraphParser::nameRE("\\s*name\\s+(\\S+)\\s*");
 const regex JobGraphParser::memoryRE("\\s*memory\\s+(\\d+)"
 				     "\\s*([bkmgBKMG]?)\\s*");
 const regex JobGraphParser::timeRE("\\s*time\\s+(\\d+)\\s*([hmsdHMSD]?)\\s*");
+//Add by Jianheng, 20180730
+//##############################
+const regex JobGraphParser::hostNameRE("\\s*hostName\\s+(\\S+)\\s*");
+//##############################
 const regex JobGraphParser::queueRE("\\s*queue\\s+(\\S+)\\s*");
 const regex JobGraphParser::projectRE("\\s*project\\s+(\\S+)\\s*");
 const regex JobGraphParser::sgeOptionsRE("\\s*sge_options\\s+(.+)");
@@ -822,6 +833,11 @@ JobGraphParser::parseJob (const string& line)
 		<< units;
 	    throw logic_error(err.str());
 	}
+	//Add by Jianheng, 20180730
+	//########################################
+	} else if (regex_match(line, matches, hostNameRE)) {
+	curJob_->hostName_.assign(matches[1].first, matches[1].second);
+	//########################################
     } else if (regex_match(line, matches, queueRE)) {
 	curJob_->queue_.assign(matches[1].first, matches[1].second);
     } else if (regex_match(line, matches, projectRE)) {

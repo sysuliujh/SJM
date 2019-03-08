@@ -78,6 +78,10 @@ public:
     unsigned memoryLimit() const { return memoryLimit_; }
     unsigned timeLimit() const { return timeLimit_; }
     const std::string& queue() const { return queue_; }
+	//Add by Jianheng, 20180730
+	//############################
+	const std::string& hostName() const { return hostName_; }
+	//############################
     const std::string& project() const { return project_; }
     const std::string& schedOptions() const { return schedOptions_; }
     const std::string command() const { return command_; }
@@ -129,6 +133,10 @@ private:
     unsigned memoryLimit_;	// memory limit (Mbytes)
     unsigned timeLimit_;	// CPU time limit (hours)
     std::string queue_;		// queue
+	//Add by Jianheng, 20180730 
+	//############################################
+	std::string hostName_;
+	//############################################
     std::string project_;	// project
     std::string schedOptions_;	// scheduler options
     std::string command_;	// command to run
@@ -213,6 +221,10 @@ private:
     static const boost::regex nameRE;
     static const boost::regex memoryRE;
     static const boost::regex timeRE;
+    //Add by Jianheng
+    //#####################################
+	static const boost::regex hostNameRE;
+	//#####################################
     static const boost::regex queueRE;
     static const boost::regex projectRE;
     static const boost::regex schedOptionsRE;
