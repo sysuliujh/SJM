@@ -4,9 +4,13 @@ Modifiy source code to allow the addition of tag "hostName" to guide
 SJM to submit jobs to certain nodes.
 
 Example:
+
 job_begin
+
  job_name test
+ 
  hostName node0
+ 
  ...
 
 Simple Job Manager (SJM)
